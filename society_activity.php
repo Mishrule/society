@@ -254,11 +254,11 @@
 
                                                                 <div class="form-group">
                                                                     <label for="male">Male</label>
-                                                                    <input name="male" id="male" type="number" class="form-control" placeholder="eg. 0">
+                                                                    <input name="male" id="male" type="number" class="form-control" value="0" placeholder="eg. 0">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="female">Female</label>
-                                                                    <input name="female" id="female" type="number" class="form-control" placeholder="eg. 0">
+                                                                    <input name="female" id="female" type="number" class="form-control" value="0" placeholder="eg. 0">
                                                                 </div>
 
 
@@ -290,6 +290,11 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
+                                                <!-- <div class="row">
+                                                    <div align="center">
+                                                        <h4>WEEKLY RECORDS</h4>
+                                                    </div>
+                                                </div> -->
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="devit-card-custom">
@@ -297,7 +302,7 @@
                                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                                     <div class="form-group">
-                                                                        <select name="month" id="month" class="form-control">
+                                                                        <select name="previewmonth" id="previewmonth" class="form-control">
                                                                             <option value="None">Select Month</option>
                                                                             <option value="January">January</option>
                                                                             <option value="February">February</option>
@@ -316,7 +321,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                                    <select name="year" id="year" class="form-control">
+                                                                    <select name="previewyear" id="previewyear" class="form-control">
 
                                                                         <?php
                                                                         $yearFetchDisplay = '';
@@ -340,18 +345,28 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <hr>
+                                                <div align="center">
+                                                    <h4>WEEKLY RECORDS</h4>
+                                                </div>
+                                                
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <table class="table table-responsive">
-                                                            <th>S/N</th>
-                                                            <th>Operations</th>
-                                                            <th>Week1</th>
-                                                            <th>Week2</th>
-                                                            <th>Week3</th>
-                                                            <th>Week4</th>
-                                                            <th>Week5</th>
-                                                            <th>Total</th>
-                                                        </table>
+                                                        <div id="weeklyFetchRecord"></div>
+
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div align="center">
+                                                        <h4>GENDER</h4>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div id="genderFetchRecord"></div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -568,6 +583,7 @@
                 let activityGroupPerformBTN = $('#activityGroupBTN').val();
                 // alert(year);
 
+
                 $.ajax({
                     url: 'scripts/societyActivityScripts.php',
                     method: 'POST',
@@ -590,6 +606,89 @@
                 });
             }
         });
+
+        weeklyRecords();
+
+        // ================= Preview Activity
+        function weeklyRecords() {
+            let selectWeeklyRecord = "weeklyRecord";
+            let selectWeeklyRecordYear = $('#previewyear').val();
+            // alert(selectWeeklyRecordYear);
+            $.ajax({
+                url: 'scripts/societyActivityScripts.php',
+                method: 'GET',
+                data: {
+                    selectWeeklyRecord,
+                    selectWeeklyRecordYear
+                },
+                success: function(data) {
+                    $('#weeklyFetchRecord').html(data);
+
+                }
+            });
+        }
+
+        $('#previewmonth').change(function(){
+            let selectWeeklyRecordmonth = $('#previewmonth').val();
+            let selectWeeklyRecordYear = $('#previewyear').val();
+            // alert(selectWeeklyRecordmonth);
+            //  alert(selectWeeklyRecordYear);
+            $.ajax({
+                url: 'scripts/societyActivityScripts.php',
+                method: 'GET',
+                data: {
+                    selectWeeklyRecordmonth,
+                    selectWeeklyRecordYear
+                },
+                success: function(data) {
+                    $('#weeklyFetchRecord').html(data);
+
+                }
+            });
+
+        });
+
+        // ================= Gender Activity
+        weeklyGenderRecords();
+        function weeklyGenderRecords() {
+            let selectGenderRecord = "weeklyRecord";
+            let  weeklyGenderRecordsYear= $('#previewyear').val();
+            // alert(weeklyGenderRecordsYear);
+            $.ajax({
+                url: 'scripts/societyActivityScripts.php',
+                method: 'GET',
+                data: {
+                    selectGenderRecord,
+                    weeklyGenderRecordsYear
+                },
+                success: function(data) {
+                    $('#genderFetchRecord').html(data);
+
+                }
+            });
+        }
+
+        // Change Month
+        $('#previewmonth').change(function(){
+            let selectWeeklyGendermonth = $('#previewmonth').val();
+            let selectWeeklyGenderYear = $('#previewyear').val();
+            // alert(selectWeeklyGendermonth);
+            //  alert(selectWeeklyGenderYear);
+             $.ajax({
+                url: 'scripts/societyActivityScripts.php',
+                method: 'GET',
+                data: {
+                    selectWeeklyGendermonth,
+selectWeeklyGenderYear
+                },
+                success: function(data) {
+                    $('#genderFetchRecord').html(data);
+
+                }
+            });
+
+        });
+        
     })
 </script>
 
