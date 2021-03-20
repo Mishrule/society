@@ -1,3 +1,48 @@
+<?php include_once('scripts/db.php'); 
+include_once('scripts/datetime.php'); 
+$msg ='';
+if(isset($_POST['createUser'])){
+    $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $pass = mysqli_real_escape_string($con, $_POST['pass']);
+    $contact = mysqli_real_escape_string($con, $_POST['contact']);
+    $location = mysqli_real_escape_string($con, $_POST['location']);
+    $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $societyName = mysqli_real_escape_string($con, $_POST['societyName']);
+    $circuitName = mysqli_real_escape_string($con, $_POST['circuitName']);
+    // $societylocation = mysqli_real_escape_string($con, $_POST['societylocation']);
+    // userimage
+    $Image = $_FILES['userimage']['name'];
+    $Target = "img/".basename($_FILES['studentImage']['name']);
+    $postDetailsSQL = "INSERT INTO usersaccount VALUES('','$firstname','$username','$pass','$contact','$location','$gender','$societyName','$circuitName','$Image','$DateTime')";
+
+    $postDetailsResult = mysqli_query($con, $postDetailsSQL);
+
+    move_uploaded_file($_FILES['userimage']['tmp_name'], $Target);
+    if($registerResult){
+        $msg = '
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>'.$username.'</strong> Registered Successfully
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        ';
+        header("Refresh:2");
+    }else{
+        $msg = '
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>'.mysqli_error($con).'</strong>  Failed Try again
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        ';
+    }
+
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -39,89 +84,79 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                    <form action="<?php $Php_SELF ?>" method="POST" enctype="multipart/form-data" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <input name="firstname" type="text" class="form-control" placeholder="Full Name">
+                                                                    <input name="firstname" id="firstname" type="text" class="form-control" placeholder="Full Name">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="address" type="text" class="form-control" placeholder="Address">
+                                                                    <input name="username" id="username" type="text" class="form-control" placeholder="Username">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="mobileno" type="number" class="form-control" placeholder="Mobile no.">
+                                                                    <input name="pass" id="pass" type="text" class="form-control" placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="finish" id="finish" type="text" class="form-control" placeholder="Date of Birth">
+                                                                    <input name="contact" id="contact" type="number" class="form-control" placeholder="Contact Number">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="postcode" id="postcode" type="text" class="form-control" placeholder="Postcode">
+                                                                    <input name="location" id="location" type="text" class="form-control" placeholder="User Location">
                                                                 </div>
-                                                                <div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom">
-                                                                        <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                        <p class="edudropnone"><span class="note needsclick">(This is just a demo dropzone. Selected image is <strong>not</strong> actually uploaded.)</span>
-                                                                        </p>
-                                                                        <input name="imageico" class="hd-pro-img" type="text" />
-                                                                    </div>
-                                                                </div>
+                                                                
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <input name="department" type="text" class="form-control" placeholder="Department">
-                                                                </div>
-                                                                <div class="form-group res-mg-t-15">
-                                                                    <textarea name="description" placeholder="Description"></textarea>
-                                                                </div>
+                                                                
                                                                 <div class="form-group">
                                                                     <select name="gender" class="form-control">
-																		<option value="none" selected="" disabled="">Select Gender</option>
-																		<option value="0">Male</option>
-																		<option value="1">Female</option>
+																		<option value="none" selected="" >Select Gender</option>
+																		<option value="Male">Male</option>
+																		<option value="Female">Female</option>
 																	</select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <select name="country" class="form-control">
-																			<option value="none" selected="" disabled="">Select country</option>
-																			<option value="0">India</option>
-																			<option value="1">Pakistan</option>
-																			<option value="2">Amerika</option>
-																			<option value="3">China</option>
-																			<option value="4">Dubai</option>
-																			<option value="5">Nepal</option>
+                                                                    <select name="societyName" id="societyName" class="form-control">
+																			<option value="none">Society Name</option>
+                                                                            <?php
+                                                                                $selectSocietyNameSQL = "SELECT * FROM society";
+                                                                                $selectSocietyNameResult = mysqli_query($con, $selectSocietyNameSQL);
+                                                                                while($selectSocietyNameRow = mysqli_fetch_array($selectSocietyNameResult)){
+                                                                                    echo '<option value="'.$selectSocietyNameRow['society_name'].'">'.$selectSocietyNameRow['society_name'].'</option>';
+                                                                                }
+                                                                            ?>
+																		
 																		</select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <select name="state" class="form-control">
-																			<option value="none" selected="" disabled="">Select state</option>
-																			<option value="0">Gujarat</option>
-																			<option value="1">Maharastra</option>
-																			<option value="2">Rajastan</option>
-																			<option value="3">Maharastra</option>
-																			<option value="4">Rajastan</option>
-																			<option value="5">Gujarat</option>
+                                                                    <select name="circuitName" id="circuitName" class="form-control">
+																			<option value="none">Circuit Name</option>
+                                                                            <?php
+                                                                                $selectCircuitNameSQL = "SELECT DISTINCT(circuit_name) FROM society";
+                                                                                $selectCircuitNameResult = mysqli_query($con, $selectCircuitNameSQL);
+                                                                                while($selectCircuitNameRow = mysqli_fetch_array($selectCircuitNameResult)){
+                                                                                    echo '<option value="'.$selectCircuitNameRow['circuit_name'].'">'.$selectCircuitNameRow['circuit_name'].'</option>';
+                                                                                }
+                                                                            ?>
 																		</select>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <!-- <div class="form-group">
                                                                     <select name="city" class="form-control">
-																			<option value="none" selected="" disabled="">Select city</option>
+																			<option value="none" >Diocese Name</option>
 																			<option value="0">Surat</option>
 																			<option value="1">Baroda</option>
 																			<option value="2">Navsari</option>
 																			<option value="3">Baroda</option>
 																			<option value="4">Surat</option>
-																		</select>
-                                                                </div>
+																	</select>
+                                                                </div> -->
                                                                 <div class="form-group">
-                                                                    <input name="website" type="text" class="form-control" placeholder="Website URL">
+                                                                    <input name="userimage" id="userimage" type="file" class="form-control" placeholder="User Image">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                    <button type="submit" id="createUser" name="createUser" value="createUser" class="btn btn-primary waves-effect waves-light">Create User</button>
                                                                 </div>
                                                             </div>
                                                         </div>

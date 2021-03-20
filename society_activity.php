@@ -373,7 +373,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="product-tab-list tab-pane fade" id="report">
+                                 <div class="product-tab-list tab-pane fade" id="report">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
@@ -399,7 +399,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -679,7 +679,7 @@
                 method: 'GET',
                 data: {
                     selectWeeklyGendermonth,
-selectWeeklyGenderYear
+                    selectWeeklyGenderYear
                 },
                 success: function(data) {
                     $('#genderFetchRecord').html(data);
