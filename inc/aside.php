@@ -27,8 +27,8 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Professors" href="society_new_member.php"><span class="mini-sub-pro">Register New Member</span></a></li>
                                 <li><a title="All Professors" href="society_activity.php"><span class="mini-sub-pro">Activity</span></a></li>
-                                <li><a title="Add Professor" href="society_member_profile.php"><span class="mini-sub-pro">Member Profile</span></a></li>
-                                <!-- <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Preview Activity</span></a></li>
+                               <!-- <li><a title="Add Professor" href="society_member_profile.php"><span class="mini-sub-pro">Member Profile</span></a></li>
+                                 <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Preview Activity</span></a></li>
                                 <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Reports</span></a></li> -->
                             </ul>
                         </li>

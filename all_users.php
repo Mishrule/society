@@ -1,3 +1,4 @@
+<?php include_once('scripts/db.php'); ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -21,19 +22,34 @@
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30">
-                            <div class="student-img">
-                                <img src="img/student/1.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <?php
+                        $fetchAllUsersSQL = "SELECT * FROM useraccount";
+                        $fetchAllUsersResult = mysqli_query($con, $fetchAllUsersSQL);
+                        if(mysqli_num_rows($fetchAllUsersResult)>0){
+                            while($fetchAllUsersRow = mysqli_fetch_array($fetchAllUsersResult)){
+                                echo '
+                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="student-inner-std res-mg-b-30">
+                                        <div class="student-img">
+                                            <img src="img/profile'.$fetchAllUsersRow['image'].'" width="600px" height="600px" alt="User Image" />
+                                        </div>
+                                        <div class="student-dtl">
+                                            <h2>'.$fetchAllUsersRow['fullname'].'</h2>
+                                            <p class="dp">'.$fetchAllUsersRow['username'].'</p>
+                                            <p class="dp-ag">'.$fetchAllUsersRow['contact'].'</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                ';
+                            }
+                        }else{
+                            echo '<h3>
+                                <marquee><span style="color:red;">Sorry There is no registered Users yet '.mysqli_error($con).'</span></marquee>
+                            </h3>';
+                        }
+                    ?>
+                    
+                 <!--   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="student-inner-std res-mg-b-30">
                             <div class="student-img">
                                 <img src="img/student/2.jpg" alt="" />
@@ -119,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         

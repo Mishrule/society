@@ -33,10 +33,10 @@
                                 <li><a href="#reviews"> Manage Information</a></li>
                                 <!-- <li><a href="#updateImage">Upload Image</a></li> -->
                             </ul>
-                            
+
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
-                                <div id="registrationMessage"></div>
+                                    <div id="registrationMessage"></div>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
@@ -179,7 +179,7 @@
                                                             </caption>
                                                             <div id="deleteMessage"></div>
                                                             <div id="displaySearch"></div>
-
+                                                        </caption>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
                             </div>
-                           <!-- <div class="product-tab-list tab-pane fade" id="updateImage">
+                            <!-- <div class="product-tab-list tab-pane fade" id="updateImage">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
@@ -438,7 +438,7 @@
                     },
                     success: function(data) {
                         $('#deleteMessage').html(data);
-                       
+
                         fetchFromDB();
                     }
                 });
@@ -464,8 +464,8 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <!-- <div class="form-group"> -->
-                                <!-- <label for="updateid">ID</label> -->
-                                <input name="updateid" id="updateid" type="hidden" class="form-control" placeholder="ID" disabled>
+                            <!-- <label for="updateid">ID</label> -->
+                            <input name="updateid" id="updateid" type="hidden" class="form-control" placeholder="ID" disabled>
 
                             <!-- </div> -->
                             <div class="form-group">
