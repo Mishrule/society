@@ -13,23 +13,12 @@
         $societyResult = mysqli_query($con, $societySQL);
         if($societyResult){
             echo '
-            <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>Success: </strong>'. $society_name_Text.' Society Created Successfully.</p>
-            </div>
+                Success: '. $society_name_Text.' Society Created Successfully.</p>
+           
             ';
         }else{
             echo '
-            <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>ERROR!</strong> Failed to Create Society '.mysqli_error($con).'</p>
-            </div>
+                ERROR! Failed to Create Society '.mysqli_error($con).'
             ';
         }
     }
@@ -44,23 +33,11 @@
         $operationsResult = mysqli_query($con, $operationsSQL);
         if($operationsResult){
             echo '
-            <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>Success: </strong>'. $createOperations.' Created Successfully.</p>
-            </div>
+            Success: '. $createOperations.' Created Successfully.</p>
             ';
         }else{
             echo '
-            <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>ERROR!</strong> Failed to Create Society '.mysqli_error($con).'</p>
-            </div>
+            ERROR! Failed to Create Operations '.mysqli_error($con).'
             ';
         }
     }
@@ -75,23 +52,12 @@
              $GroupingsResult = mysqli_query($con, $GroupingsSQL);
              if($GroupingsResult){
                  echo '
-                 <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                     <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                         <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                     </button>
-                     <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                     <p class="message-alert-none"><strong>Success: </strong>'. $createGroupings.' Created Successfully.</p>
-                 </div>
+                 Success: '. $createGroupings.' Created Successfully.</p>
+                 
                  ';
              }else{
                  echo '
-                 <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                     <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                         <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                     </button>
-                     <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                     <p class="message-alert-none"><strong>ERROR!</strong> Failed to Create Society '.mysqli_error($con).'</p>
-                 </div>
+                 ERROR! Failed to Create Groupings '.mysqli_error($con).'
                  ';
              }
          }
@@ -107,23 +73,12 @@
          $yearResult = mysqli_query($con, $yearSQL);
          if($yearResult){
              echo '
-             <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                 </button>
-                 <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                 <p class="message-alert-none"><strong>Success: </strong>'. $createYear.' Created Successfully.</p>
-             </div>
+             Success: '. $createYear.'  Created Successfully.</p>
+             
              ';
          }else{
              echo '
-             <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                 </button>
-                 <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                 <p class="message-alert-none"><strong>ERROR!</strong> Failed to Create Society '.mysqli_error($con).'</p>
-             </div>
+             ERROR! Failed to Create Year '.mysqli_error($con).'
              ';
          }
     }

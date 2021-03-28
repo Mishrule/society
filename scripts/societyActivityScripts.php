@@ -32,23 +32,13 @@
          $operationsResult = mysqli_query($con, $operationsSQL);
          if($operationsResult){
              echo '
-             <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                 </button>
-                 <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                 <p class="message-alert-none"><strong>Success: </strong>Activity Created Successfully.</p>
-             </div>
+             Success: Activity Created Successfully.</p>
+             
              ';
          }else{
              echo '
-             <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                 </button>
-                 <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                 <p class="message-alert-none"><strong>ERROR!</strong> Failed to Add '.mysqli_error($con).'</p>
-             </div>
+             ERROR! Failed to Create Year '.mysqli_error($con).'
+             
              ';
          }
     }
@@ -101,11 +91,9 @@
         $updateActivityResult = mysqli_query($con, $updateActivitySQL);
     
         if($updateActivityResult){
-            echo '<i class="educate-icon educate-checked modal-check-pro"></i>
-                <h4 style="color: blue;">Update Successfully</h4>';
+            echo 'Success: Update Successfully.</p>';
         }else{
-            echo '<span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-                <h4 style="color: red;">Oops Failed to Update Try again'.mysqli_error($con).'</h4>';
+            echo ' ERROR! Failed to Create Year '.mysqli_error($con).'</h4>';
         }
     }
 
@@ -139,23 +127,12 @@
         $insertGroupResult = mysqli_query($con, $insertGroupSQL);
         if($insertGroupResult){
             echo '
-            <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                    <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                </button>
-                <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>Success: </strong>'.$groupName.' Saved Successfully.</p>
-            </div>
+            Success: '.$groupName.' Saved Successfully.
+            
             ';
         }else{
             echo '
-            <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                    <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                </button>
-                <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>ERROR!</strong> Failed to Add '.mysqli_error($con).'</p>
-            </div>
+             ERROR! Failed to Insert '.mysqli_error($con).'</h4>           
             ';
         }
     }
@@ -168,7 +145,8 @@
         $selectWeeklyRecordSQL = "SELECT * FROM operationtype WHERE years='$selectWeeklyRecord' LIMIT 10";
 
         $selectWeeklyRecordOutput ='
-        <table class="table table-responsive">
+        <div class="table-responsive">
+        <table class="table">
             <th>S/N</th>
             <th>Operations</th>
             <th>Week1</th>
@@ -216,6 +194,7 @@
         $selectWeeklyRecordOutput .='
         </tbody>
         </table>
+        </div>
         ';
 
         echo $selectWeeklyRecordOutput;
@@ -231,7 +210,8 @@
         $selectWeeklyRecordSQLMonth = "SELECT * FROM operationtype WHERE years='$selectWeeklyRecordYear' AND month='$selectWeeklyRecordmonth'";
 
         $selectWeeklyRecordOutputMonth ='
-        <table class="table table-responsive">
+        <div class="table-responsive">
+        <table class="table">
             <th>S/N</th>
             <th>Operations</th>
             <th>Week1</th>
@@ -279,6 +259,7 @@
         $selectWeeklyRecordOutputMonth .='
         </tbody>
         </table>
+        </div>
         ';
 
         echo $selectWeeklyRecordOutputMonth;
@@ -291,7 +272,8 @@
         $selectGenderRecordSQL = "SELECT * FROM group_activity WHERE group_year='$selectGenderRecord' LIMIT 10";
 
         $selectGenderRecordOutput ='
-        <table class="table table-responsive">
+        <div class="table-responsive">
+        <table class="table">
             <th>S/N</th>
             <th>Group Name</th>
             <th>Male</th>
@@ -333,6 +315,7 @@
         $selectGenderRecordOutput .='
         </tbody>
         </table>
+        </div>
         ';
 
         echo $selectGenderRecordOutput;
@@ -347,7 +330,8 @@
         $selectGenderRecordSQLMonth = "SELECT * FROM group_activity WHERE group_year='$selectWeeklyGenderYear' AND group_month='$selectWeeklyGendermonth' ";
 
         $selectGenderRecordOutputMonth ='
-        <table class="table table-responsive">
+        <div class="table-responsive">
+        <table class="table">
             <th>S/N</th>
             <th>Group Name</th>
             <th>Male</th>
@@ -389,6 +373,7 @@
         $selectGenderRecordOutputMonth .='
         </tbody>
         </table>
+        </div>
         ';
 
         echo $selectGenderRecordOutputMonth;

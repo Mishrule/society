@@ -125,8 +125,8 @@ require_once('datetime.php');
             $fetch_Result = mysqli_query($con, $fetch_SQL);
             
             if(mysqli_num_rows($fetch_Result) > 0){
-                // while($fetchRow = mysqli_fetch_array($fetchResult)){
-                    $fetch_Row = mysqli_fetch_array($fetch_Result);    
+                while($fetch_Row = mysqli_fetch_array($fetch_Result)){
+                    // $fetch_Row = mysqli_fetch_array($fetch_Result);    
                     $fetchArray['updateid'] = $fetch_Row['user_id'];
                     $fetchArray['updateFullName'] = $fetch_Row['fullname'];
                     $fetchArray['updateUsername'] = $fetch_Row['username'];
@@ -135,7 +135,7 @@ require_once('datetime.php');
                     $fetchArray['updateLocation'] = $fetch_Row['userlocation'];
                     $fetchArray['updateGender'] = $fetch_Row['gender'];
                                    
-                // }
+                }
             }
             
             echo json_encode($fetchArray);
@@ -157,11 +157,33 @@ require_once('datetime.php');
             $updateResult = mysqli_query($con, $updateSQL);
     
             if($updateResult){
-                echo '<i class="educate-icon educate-checked modal-check-pro"></i>
-                <h4 style="color: blue;">Update Successfully</h4>';
+                echo '
+                Success: Update Successfully
+                ';
             }else{
-                echo '<span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-                <h4 style="color: red;">Oops Failed to Update Try again'.mysqli_error($con).'</h4>';
+                echo 'ERROR! Failed to Update Records '.mysqli_error($con).'';
             }
+    }
+
+    // =================== DELETE USER
+     // =====================| DELETE RECORDS 
+     if(isset($_POST['del'])){ 
+        $del = mysqli_real_escape_string($con, $_POST['del']);
+        
+
+        $delSQL = "DELETE FROM useraccount WHERE user_id='$del'";
+
+        $delResult = mysqli_query($con, $delSQL);
+
+        if($delResult){
+            echo '
+                Success: '. $del.' Update Successfully
+            ';
+        }else{
+            echo '
+             ERROR! Failed to Deleted Records '.mysqli_error($con).'
+             ';
+    
+        }
     }
 ?>

@@ -20,23 +20,11 @@
         $registerResult = mysqli_query($con, $registerSQL);
         if($registerResult){
             echo '
-            <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>Success: </strong>'. $firstnameText.' is Successfully registered as a Member of the Society.</p>
-            </div>
+            Success: '.$firstnameText.' is Successfully registered as a Member of the Society.
             ';
         }else{
             echo '
-            <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>ERROR!</strong> Failed to Register a Member '.mysqli_error($con).'</p>
-            </div>
+            ERROR! Failed to Create Year '.mysqli_error($con).'
             ';
         }
     }
@@ -145,15 +133,15 @@
     $fetchArray = array();  
     if(isset($_GET['fetchDetails'])){ 
             
-        $fetchDetails = mysqli_real_escape_string($con, $_GET['fetchDetails']);
+        $fetch_Details = mysqli_real_escape_string($con, $_GET['fetchDetails']);
         
-        $fetchSQL = "SELECT * FROM members WHERE member_id = '$fetchDetails'";
+        $fetchSQL = "SELECT * FROM members WHERE member_id = '$fetch_Details'";
     
         $fetchResult = mysqli_query($con, $fetchSQL);
-        
+       
         if(mysqli_num_rows($fetchResult) > 0){
-            // while($fetchRow = mysqli_fetch_array($fetchResult)){
-                $fetchRow = mysqli_fetch_array($fetchResult);    
+            while($fetchRow = mysqli_fetch_array($fetchResult)){
+                // $fetchRow = mysqli_fetch_array($fetchResult);    
                 $fetchArray['update_id'] = $fetchRow['member_id'];
                 $fetchArray['update_FullName'] = $fetchRow['fullname'];
                 $fetchArray['update_Address'] = $fetchRow['address'];
@@ -163,14 +151,16 @@
                 $fetchArray['update_Gender'] = $fetchRow['gender'];
                 $fetchArray['update_Community'] = $fetchRow['community'];
                 $fetchArray['update_FullMember'] = $fetchRow['fullmember'];
-                $fetchArray['update_JuniorMember'] = $fetchRow['junionmember'];
+                $fetchArray['update_JuniorMember'] = $fetchRow['juniormember'];
                 $fetchArray['update_Catechumens'] = $fetchRow['catechumens'];
                 $fetchArray['update_Adherents'] = $fetchRow['adherents'];
                 
-            // }
-        }
+            }
+        }else{
+            echo mysqli_error($con);
+        } 
         
-        echo json_encode($fetchArray);
+        echo json_encode($fetchArray); 
     }
 
     // =====================| UPDATE RECORDS 
@@ -188,16 +178,15 @@
         $updateCatechumens = mysqli_real_escape_string($con, $_POST['updateCatechumens']);
         $updateAdherents = mysqli_real_escape_string($con, $_POST['updateAdherents']);
 
-        $updateSQL = "UPDATE members SET fullname='$updateFullName', address='$updateAddress', mobilenumber='$updateMobile', dob='$updatedob', location=' $updateLocation', gender='$updateGender', community=' $updateCommunity', fullmember='$updateFullMember', junionmember='$updateJuniorMember', catechumens='$updateCatechumens', adherents='$updateAdherents' WHERE member_id='$updateid'";
+        $updateSQL = "UPDATE members SET fullname='$updateFullName', address='$updateAddress', mobilenumber='$updateMobile', dob='$updatedob', location=' $updateLocation', gender='$updateGender', community=' $updateCommunity', fullmember='$updateFullMember', juniormember='$updateJuniorMember', catechumens='$updateCatechumens', adherents='$updateAdherents' WHERE member_id='$updateid'";
 
         $updateResult = mysqli_query($con, $updateSQL);
 
         if($updateResult){
-            echo '<i class="educate-icon educate-checked modal-check-pro"></i>
-            <h4 style="color: blue;">Update Successfully</h4>';
+            echo 'Success: Update Successfully
+            ';
         }else{
-            echo '<span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-            <h4 style="color: red;">Oops Failed to Update Try again'.mysqli_error($con).'</h4>';
+            echo 'ERROR! Failed to Create Year '.mysqli_error($con).'';
         }
     }
 
@@ -212,23 +201,12 @@
 
         if($delResult){
             echo '
-            <div class="alert alert-success alert-success-style1 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>Success: </strong>'. $del.' is Deleted Successfully.</p>
-            </div>
+            Success: '. $del.' is Deleted Successfully.
+            
             ';
         }else{
             echo '
-            <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
-                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-					<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-				</button>
-                <i class="fa fa-times edu-danger-error admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
-                <p class="message-alert-none"><strong>ERROR!</strong> Failed to Deleted Records '.mysqli_error($con).'</p>
-            </div>
+            ERROR! Failed to Create Year '.mysqli_error($con).'            
             ';
         }
     }
