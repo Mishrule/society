@@ -11,7 +11,7 @@ if (isset($_POST['createUser'])) {
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
     $societyName = mysqli_real_escape_string($con, $_POST['societyName']);
     $circuitName = mysqli_real_escape_string($con, $_POST['circuitName']);
-    // $societylocation = mysqli_real_escape_string($con, $_POST['societylocation']);
+    $accessLevel = mysqli_real_escape_string($con, $_POST['accessLevel']);
     // userimage
     if($username == ""){
         $msg = '
@@ -23,7 +23,7 @@ if (isset($_POST['createUser'])) {
                 <p class="message-alert-none"><strong>ERROR!</strong> Username Can not be Empty</p>
             </div>
         ';
-    }else if($password == ""){
+    }else if($pass == ""){
         $msg = '
         <div class="alert alert-danger alert-mg-b alert-success-style4 alert-success-stylenone">
                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
@@ -36,7 +36,7 @@ if (isset($_POST['createUser'])) {
     }else{
     $Image = $_FILES['userimage']['name'];
     $Target = "assets/img/profile/" . basename($_FILES['userimage']['name']);
-    $postDetailsSQL = "INSERT INTO useraccount VALUES('','$firstname','$username','$pass','$contact','$location','$gender','$societyName','$circuitName','','$DateTime')";
+    $postDetailsSQL = "INSERT INTO useraccount VALUES('','$firstname','$username','$pass','$contact','$location','$gender','$societyName','$circuitName','','$DateTime','$accessLevel')";
 
     $postDetailsResult = mysqli_query($con, $postDetailsSQL);
 
@@ -194,6 +194,11 @@ if (isset($_POST['createUser'])) {
 																			<option value="4">Surat</option>
 																	</select>
                                                                 </div> -->
+                                                                <div class="form-group">
+                                                                    <select name="accessLevel" id="accessLevel" class="form-control">
+                                                                        <option value="society">Society</option> 
+                                                                    </select>
+                                                                </div>
 
                                                                 <div class="mb-3">
                                                                     

@@ -1,4 +1,155 @@
+<?php 
+	include_once('scripts/db.php');
+	session_start();
+	$loginMsg=''; $loginSQL=''; $loginResult='';
+	$userName = '';
+$password = '';
+$accessLevel = '';
 
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$userName = mysqli_real_escape_string($con, $_POST['userName']);
+		$password = mysqli_real_escape_string($con, $_POST['password']);
+		$accessLevel = mysqli_real_escape_string($con, $_POST['accessLevel']);
+
+		if($userName == ''){
+			$loginMsg='
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>Name Field can not be empty</strong> .
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			';
+		}else if($password == ''){
+			$loginMsg='
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>Password Field can not be empty</strong> .
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			';
+		}else{
+			if($accessLevel == 'society'){
+				$loginSQL = "SELECT username FROM useraccount WHERE username='$userName' AND zpassword='$password' AND access_level='$accessLevel'";
+				$loginResult = mysqli_query($con, $loginSQL);
+				$row = mysqli_fetch_array($loginResult);
+				$count = mysqli_num_rows($loginResult);
+				if ($count == 1) {
+					$_SESSION['user_login'] = $userName;
+					$_SESSION['user_accessLevel'] = $accessLevel;
+					header("location:dashboard.php");
+				}else {
+					$loginMsg='
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Invalid ID or Password</strong> .
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					';
+				} 
+			}/*else if($accessLevel == 'student'){
+				$loginSQL = "SELECT student_index FROM student WHERE student_index='$userName' AND student_password='$password' AND access_level='$accessLevel'";
+				$loginResult = mysqli_query($con, $loginSQL);
+				$row = mysqli_fetch_array($loginResult);
+				$count = mysqli_num_rows($loginResult);
+				if ($count == 1) {
+					$_SESSION['user_login'] = $userName;
+					$_SESSION['user_accessLevel'] = $accessLevel;
+					header("location:student/dashboard.php");
+				}else {
+					$loginMsg='
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Invalid ID or Password</strong> .
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					';
+				}
+			}else if($accessLevel == 'Financial Clearance (Including SRC)'){
+				$loginSQL = "SELECT staff_id FROM account WHERE staff_id='$userName' AND staff_password='$password' AND access_level='$accessLevel'";
+				$loginResult = mysqli_query($con, $loginSQL);
+				$row = mysqli_fetch_array($loginResult);
+				$count = mysqli_num_rows($loginResult);
+				if ($count == 1) {
+					$_SESSION['user_login'] = $userName;
+					$_SESSION['user_accessLevel'] = $accessLevel;
+					header("location:finance/index.php");
+				}else {
+					$loginMsg='
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Invalid ID or Password</strong> .
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					';
+				} 
+			}else if($accessLevel == 'Department Clearance (Departmental Dues)'){
+				$loginSQL = "SELECT staff_id FROM account WHERE staff_id='$userName' AND staff_password='$password' AND access_level='$accessLevel'";
+				$loginResult = mysqli_query($con, $loginSQL);
+				$row = mysqli_fetch_array($loginResult);
+				$count = mysqli_num_rows($loginResult);
+				if ($count == 1) {
+					$_SESSION['user_login'] = $userName;
+					$_SESSION['user_accessLevel'] = $accessLevel;
+					header("location:department/index.php");
+				}else {
+					$loginMsg='
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Invalid ID or Password</strong> .
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					';
+				} 
+			}else if($accessLevel == 'Library Clearance (Lost of Books)'){
+				$loginSQL = "SELECT staff_id FROM account WHERE staff_id='$userName' AND staff_password='$password' AND access_level='$accessLevel'";
+				$loginResult = mysqli_query($con, $loginSQL);
+				$row = mysqli_fetch_array($loginResult);
+				$count = mysqli_num_rows($loginResult);
+				if ($count == 1) {
+					$_SESSION['user_login'] = $userName;
+					$_SESSION['user_accessLevel'] = $accessLevel;
+					header("location:library/index.php");
+				}else {
+					$loginMsg='
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Invalid ID or Password</strong> .
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					';
+				} 
+			}else if($accessLevel == 'Hall Clearance'){
+				$loginSQL = "SELECT staff_id FROM account WHERE staff_id='$userName' AND staff_password='$password' AND access_level='$accessLevel'";
+				$loginResult = mysqli_query($con, $loginSQL);
+				$row = mysqli_fetch_array($loginResult);
+				$count = mysqli_num_rows($loginResult);
+				if ($count == 1) {
+					$_SESSION['user_login'] = $userName;
+					$_SESSION['user_accessLevel'] = $accessLevel;
+					header("location:hall/index.php");
+				}else {
+					$loginMsg='
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Invalid ID or Password</strong> .
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					';
+				} 
+			}*/
+		}
+	}
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +158,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <title>MCG | Login</title>
   <!-- Favicon -->
   <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -23,9 +174,9 @@
   <!-- Navbar -->
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="dashboard.html">
+      <!-- <a class="navbar-brand" href="dashboard.html">
         <img src="assets/img/brand/white.png">
-      </a>
+      </a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,7 +195,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> <!--
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a href="dashboard.html" class="nav-link">
@@ -61,9 +212,9 @@
               <span class="nav-link-inner--text">Register</span>
             </a>
           </li>
-        </ul>
+        </ul> -->
         <hr class="d-lg-none" />
-        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <!-- <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <li class="nav-item">
             <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" data-toggle="tooltip" data-original-title="Like us on Facebook">
               <i class="fab fa-facebook-square"></i>
@@ -96,10 +247,10 @@
               <span class="nav-link-inner--text">Upgrade to PRO</span>
             </a>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
-  </nav>
+  </nav> 
   <!-- Main content -->
   <div class="main-content">
     <!-- Header -->
@@ -109,7 +260,7 @@
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
               <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+              <p class="text-lead text-white">Use these awesome forms to login.</p>
             </div>
           </div>
         </div>
@@ -125,7 +276,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary border-0 mb-0">
-            <div class="card-header bg-transparent pb-5">
+            <!-- <div class="card-header bg-transparent pb-5">
               <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
               <div class="btn-wrapper text-center">
                 <a href="#" class="btn btn-neutral btn-icon">
@@ -137,18 +288,19 @@
                   <span class="btn-inner--text">Google</span>
                 </a>
               </div>
-            </div>
+            </div> -->
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Sign in with your credentials</small>
               </div>
-              <form role="form">
+              <form role="form" method="POST" action="<?php $_PHP_SELF; ?>" enctype="multipart/form-data">
+                <?php echo $loginMsg; ?>
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                      <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <input class="form-control" id="userName" name="userName" placeholder="Username" type="text">
                   </div>
                 </div>
                 <div class="form-group">
@@ -156,29 +308,41 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
+                    <input class="form-control" id="password" name="password" placeholder="Password" type="password">
                   </div>
                 </div>
-                <div class="custom-control custom-control-alternative custom-checkbox">
+                <div class="form-group">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-check-bold"></i></span>
+                    </div>
+                    <select name="accessLevel" id="accessLevel" class="form-control">
+                      <option value="society">Society</option> 
+                      <option value="community">Community</option>
+                      <option value="dioceses">Dioceses</option>
+                  </select>
+                  </div>
+                </div>
+                <!-- <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
                   <label class="custom-control-label" for=" customCheckLogin">
                     <span class="text-muted">Remember me</span>
                   </label>
-                </div>
+                </div> -->
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary my-4">Sign in</button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="row mt-3">
+          <!-- <div class="row mt-3">
             <div class="col-6">
               <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
               <a href="#" class="text-light"><small>Create new account</small></a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -189,11 +353,11 @@
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            &copy; 2020 | Mishrule Trades
           </div>
         </div>
         <div class="col-xl-6">
-          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <!-- <ul class="nav nav-footer justify-content-center justify-content-xl-end">
             <li class="nav-item">
               <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
             </li>
@@ -206,7 +370,7 @@
             <li class="nav-item">
               <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>

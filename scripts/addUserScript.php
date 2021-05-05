@@ -30,7 +30,7 @@ require_once('datetime.php');
                     <td>'.$fetchcount.'</td>
                     <td>'.$fetchRow['fullname'].'</td>
                     <td>'.$fetchRow['username'].'</td>
-                    <td>'.$fetchRow['password'].'</td>
+                    <td>'.$fetchRow['zpassword'].'</td>
                     <td>'.$fetchRow['contact'].'</td>
                     <td>'.$fetchRow['gender'].'</td>
                     <td>'.$fetchRow['societyname'].'</td>
@@ -87,7 +87,7 @@ require_once('datetime.php');
                     <td>'.$searchMembercount.'</td>
                     <td>'.$searchMemberRow['fullname'].'</td>
                     <td>'.$searchMemberRow['username'].'</td>
-                    <td>'.$searchMemberRow['password'].'</td>
+                    <td>'.$searchMemberRow['zpassword'].'</td>
                     <td>'.$searchMemberRow['contact'].'</td>
                     <td>'.$searchMemberRow['gender'].'</td>
                     <td>'.$searchMemberRow['societyname'].'</td>
@@ -130,7 +130,7 @@ require_once('datetime.php');
                     $fetchArray['updateid'] = $fetch_Row['user_id'];
                     $fetchArray['updateFullName'] = $fetch_Row['fullname'];
                     $fetchArray['updateUsername'] = $fetch_Row['username'];
-                    $fetchArray['updatePassword'] = $fetch_Row['password'];
+                    $fetchArray['updatePassword'] = $fetch_Row['zpassword'];
                     $fetchArray['updateContact'] = $fetch_Row['contact'];
                     $fetchArray['updateLocation'] = $fetch_Row['userlocation'];
                     $fetchArray['updateGender'] = $fetch_Row['gender'];
@@ -152,7 +152,7 @@ require_once('datetime.php');
             $updateGender = mysqli_real_escape_string($con, $_POST['updateGender']);
             
     
-            $updateSQL = "UPDATE useraccount SET fullname='$updateFullName', password='$updatePassword', contact='$updateContact', userlocation='$updateLocation', gender=' $updateGender' WHERE user_id='$updateid'";
+            $updateSQL = "UPDATE useraccount SET fullname='$updateFullName', zpassword='$updatePassword', contact='$updateContact', userlocation='$updateLocation', gender=' $updateGender' WHERE user_id='$updateid'";
     
             $updateResult = mysqli_query($con, $updateSQL);
     

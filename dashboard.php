@@ -1,4 +1,6 @@
-<?php include_once('scripts/db.php'); ?>
+<?php include_once('scripts/db.php'); 
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +22,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:;">Paper Dashboard 2</a>
+            <a class="navbar-brand" href="javascript:;">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -36,6 +38,8 @@
                     <i class="nc-icon nc-zoom-split"></i>
                   </div>
                 </div> -->
+                <span>Welcome: <?php echo $login_Session_userName; ?></span>
+                
               </div>
             </form>
             <ul class="navbar-nav">
