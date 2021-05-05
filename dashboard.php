@@ -1,3 +1,4 @@
+<?php include_once('scripts/db.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,14 +82,29 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
+                      <i class="nc-icon nc-single-02 text-warning"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Capacity</p>
-                      <p class="card-title">150GB
-                      <p>
+                      <p class="card-category">Christain Community</p>
+                      <?php 
+                         $christainCommunityMessage = '';
+                        $christainCommunitySQL = "SELECT COUNT(*) AS total FROM members WHERE community = 'yes'";
+                        $christainCommunityResult = mysqli_query($con, $christainCommunitySQL);
+                        /*if(mysqli_num_rows($christainCommunityResult)==0){
+                          // $christainCommunityMessage = 0;
+                        }else*/if(mysqli_num_rows($christainCommunityResult)>0){
+                          while($christainCommunityRow = mysqli_fetch_array($christainCommunityResult)){
+                            $christainCommunityMessage = $christainCommunityRow['total'];
+                          }
+                          // $christainCommunityMessage = mysqli_num_rows($christainCommunityResult);
+                        }else{
+                          $christainCommunityMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $christainCommunityMessage; ?> <small class="card-category">Members</small>
+                      <p> 
                     </div>
                   </div>
                 </div>
@@ -97,7 +113,7 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-refresh"></i>
-                  Update Now
+                  <?php echo $christainCommunityMessage.' Christian Members'; ?>
                 </div>
               </div>
             </div>
@@ -108,14 +124,27 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-money-coins text-success"></i>
+                      <i class="nc-icon nc-single-02 text-success"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Revenue</p>
-                      <p class="card-title">$ 1,345
-                      <p>
+                      <p class="card-category">Full Members</p>
+                      <?php 
+                         $fullMemberMessage = '';
+                        $fullMemberSQL = "SELECT COUNT(*) AS total FROM members WHERE fullmember = 'yes'";
+                        $fullMemberResult = mysqli_query($con, $fullMemberSQL);
+                        if(mysqli_num_rows($fullMemberResult)>0){
+                          while($fullMemberRow = mysqli_fetch_array($fullMemberResult)){
+                            $fullMemberMessage = $fullMemberRow['total'];
+                          }
+                         
+                        }else{
+                          $fullMemberMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $fullMemberMessage; ?> <small class="card-category">Members</small>
+                      <p> 
                     </div>
                   </div>
                 </div>
@@ -124,7 +153,7 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-calendar-o"></i>
-                  Last day
+                  <?php echo $fullMemberMessage.' Full Members'; ?>
                 </div>
               </div>
             </div>
@@ -135,14 +164,27 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-vector text-danger"></i>
+                      <i class="nc-icon nc-single-02 text-danger"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23
-                      <p>
+                      <p class="card-category">Junior Members</p>
+                      <?php 
+                         $juniorMemberMessage = '';
+                        $juniorMemberSQL = "SELECT COUNT(*) AS total FROM members WHERE juniorMember = 'yes'";
+                        $juniorMemberResult = mysqli_query($con, $juniorMemberSQL);
+                        if(mysqli_num_rows($juniorMemberResult)>0){
+                          while($juniorMemberRow = mysqli_fetch_array($juniorMemberResult)){
+                            $juniorMemberMessage = $juniorMemberRow['total'];
+                          }
+                         
+                        }else{
+                          $juniorMemberMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $juniorMemberMessage; ?> <small class="card-category">Members</small>
+                      <p> 
                     </div>
                   </div>
                 </div>
@@ -151,7 +193,7 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-clock-o"></i>
-                  In the last hour
+                  <?php echo $juniorMemberMessage.' Junior Members'; ?>
                 </div>
               </div>
             </div>
@@ -162,14 +204,27 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-favourite-28 text-primary"></i>
+                      <i class="nc-icon nc-single-02 text-primary"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Followers</p>
-                      <p class="card-title">+45K
-                      <p>
+                      <p class="card-category">Catechumens</p>
+                      <?php 
+                         $catechumensMessage = '';
+                        $catechumensSQL = "SELECT COUNT(*) AS total FROM members WHERE catechumens = 'yes'";
+                        $catechumensResult = mysqli_query($con, $catechumensSQL);
+                        if(mysqli_num_rows($catechumensResult)>0){
+                          while($catechumensRow = mysqli_fetch_array($catechumensResult)){
+                            $catechumensMessage = $catechumensRow['total'];
+                          }
+                         
+                        }else{
+                          $catechumensMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $catechumensMessage; ?> <small class="card-category">Members</small>
+                      <p> 
                     </div>
                   </div>
                 </div>
@@ -178,7 +233,167 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-refresh"></i>
-                  Update now
+                  <?php echo $catechumensMessage.' Catechumens Members'; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-single-02 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Adherents</p>
+                      <?php 
+                         $adherentsMessage = '';
+                        $adherentsSQL = "SELECT COUNT(*) AS total FROM members WHERE adherents = 'yes'";
+                        $adherentsResult = mysqli_query($con, $adherentsSQL);
+                        if(mysqli_num_rows($adherentsResult)>0){
+                          while($adherentsRow = mysqli_fetch_array($adherentsResult)){
+                            $adherentsMessage = $adherentsRow['total'];
+                          }
+                         
+                        }else{
+                          $adherentsMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $adherentsMessage; ?> <small class="card-category">Members</small>
+                      <p> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh"></i>
+                  <?php echo $adherentsMessage.' Adherents Members'; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-single-02 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Female</p>
+                      <?php 
+                         $femaleMessage = '';
+                        $femaleSQL = "SELECT COUNT(*) AS total FROM members WHERE gender = 'female'";
+                        $femaleResult = mysqli_query($con, $femaleSQL);
+                        if(mysqli_num_rows($femaleResult)>0){
+                          while($femaleRow = mysqli_fetch_array($femaleResult)){
+                            $femaleMessage = $femaleRow['total'];
+                          }
+                         
+                        }else{
+                          $femaleMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $femaleMessage; ?> <small class="card-category">Members</small>
+                      <p> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-female"></i>
+                  <?php echo $femaleMessage.' Female Members'; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-single-02 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Males</p>
+                      <?php 
+                         $maleMessage = '';
+                        $maleSQL = "SELECT COUNT(*) AS total FROM members WHERE gender = 'male'";
+                        $maleResult = mysqli_query($con, $maleSQL);
+                        if(mysqli_num_rows($maleResult)>0){
+                          while($maleRow = mysqli_fetch_array($maleResult)){
+                            $maleMessage = $maleRow['total'];
+                          }
+                         
+                        }else{
+                          $maleMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $maleMessage; ?> <small class="card-category">Members</small>
+                      <p> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-male"></i>
+                  <?php echo $maleMessage.' Male Members'; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-single-copy-04 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Members</p>
+                      <?php 
+                         $totalMemberMessage = '';
+                        $totalMemberSQL = "SELECT COUNT(*) AS total FROM members";
+                        $totalMemberResult = mysqli_query($con, $totalMemberSQL);
+                        if(mysqli_num_rows($totalMemberResult)>0){
+                          while($totalMemberRow = mysqli_fetch_array($totalMemberResult)){
+                            $totalMemberMessage = $totalMemberRow['total'];
+                          }
+                         
+                        }else{
+                          $totalMemberMessage = mysqli_error($con);
+                        }
+                      ?>
+                      <p class="card-title"><?php echo $totalMemberMessage; ?> <small class="card-category">Members</small>
+                      <p> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh"></i>
+                  <?php echo $totalMemberMessage.' Total Members'; ?>
                 </div>
               </div>
             </div>

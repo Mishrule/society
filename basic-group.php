@@ -388,8 +388,7 @@
                 let groupYear = $('#groupYear').val();
                 let activityGroupPerformBTN = $('#activityGroupBTN').val();
                 // alert(year);
-
-
+                
                 $.ajax({
                     url: 'scripts/societyActivityScripts.php',
                     method: 'POST',

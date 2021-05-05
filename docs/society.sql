@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2021 at 05:58 PM
+-- Generation Time: Apr 06, 2021 at 04:28 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -89,7 +89,9 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`member_id`, `fullname`, `address`, `mobilenumber`, `dob`, `location`, `gender`, `community`, `fullmember`, `juniormember`, `catechumens`, `adherents`, `registrationdate`) VALUES
-(2, 'Alfred Quayson', 'Tema', '025489654', '2021-03-02', '   Kumasi', 'Male', ' yes', 'yes', 'yes', 'yes', 'no', 'March-28-2021 09:56:49');
+(2, 'Alfred Quayson', 'Tema', '025489654', '2021-03-02', 'Kumasi', 'Male', 'yes', 'yes', 'yes', 'yes', 'no', 'March-28-2021 09:56:49'),
+(3, 'Anord Kwofie', 'Synaide', '26854858', '2021-03-09', ' Tarkwa', 'Male', 'yes', 'no', 'yes', 'yes', 'yes', 'March-30-2021 14:24:01'),
+(4, 'Wop3 saa', 'Kumasi', '236589654', '2021-04-07', 'Kumasi', 'Female', 'yes', 'yes', 'no', 'yes', 'no', 'April-05-2021 22:10:46');
 
 -- --------------------------------------------------------
 
@@ -255,7 +257,7 @@ ALTER TABLE `groupings`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `member_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `operations`

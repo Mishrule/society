@@ -28,11 +28,14 @@
         $total = $weekOne + $weekTwo + $weekThree + $weekFour + $weekFive;
  
          $operationsSQL = "INSERT INTO operationtype VALUES('$operationType','$weekOne','$weekTwo','$weekThree','$weekFour','$weekFive','$total','$month','$year')";
+
+         $operationsMainSQL = "UPDATE main_activity SET operation='$operationType', week1='$weekOne', week2='$weekTwo', week3='$weekThree', week4='$weekFour', week5='$weekFive', operation_total='$total' WHERE main_month='$month' AND main_year='$year'";
  
          $operationsResult = mysqli_query($con, $operationsSQL);
-         if($operationsResult){
+         $operationsMainResult = mysqli_query($con, $operationsMainSQL);
+         if($operationsResult && $operationsMainResult){
              echo '
-             Success: Activity Created Successfully.</p>
+             Success: Activity Created Successfully.
              
              ';
          }else{
@@ -87,11 +90,14 @@
         $total = $updateWeek1 + $updateWeek2 + $updateWeek3 + $updateWeek4 + $updateWeek5;
     
         $updateActivitySQL = "UPDATE operationtype SET week1='$updateWeek1', week2='$updateWeek2', week3='$updateWeek3', week4='$updateWeek4', week5='$updateWeek5', total='$total' WHERE operationtype='$FetchupdateOperation' AND month='$FetchupdateMonth' AND years='$FetchupdateYear'";
+
+        $updateActivityMainSQL = "UPDATE main_activity SET week1='$updateWeek1', week2='$updateWeek2', week3='$updateWeek3', week4='$updateWeek4', week5='$updateWeek5', operation_total='$total' WHERE operation='$FetchupdateOperation' AND main_month='$FetchupdateMonth' AND main_year='$FetchupdateYear'";
     
         $updateActivityResult = mysqli_query($con, $updateActivitySQL);
+        $updateActivityMainResult = mysqli_query($con, $updateActivityMainSQL);
     
-        if($updateActivityResult){
-            echo 'Success: Update Successfully.</p>';
+        if($updateActivityResult && $updateActivityMainResult){
+            echo 'Success: Update Successfully.';
         }else{
             echo ' ERROR! Failed to Create Year '.mysqli_error($con).'</h4>';
         }
@@ -123,16 +129,19 @@
     $total = $male + $female;
          
         $insertGroupSQL = "INSERT INTO group_activity VALUES('$groupName','$male','$female','$groupMonth','$groupYear', '$total')";
+
+        $insertGroupMainSQL = "INSERT INTO main_activity VALUES('','$groupMonth','$groupYear','', '', '','','$groupName','$male','$female', '$total','','','','','','','','','','','','','')";
          
         $insertGroupResult = mysqli_query($con, $insertGroupSQL);
-        if($insertGroupResult){
+        $insertGroupMainResult = mysqli_query($con, $insertGroupMainSQL);
+        if($insertGroupResult && $insertGroupMainResult){
             echo '
             Success: '.$groupName.' Saved Successfully.
             
             ';
         }else{
             echo '
-             ERROR! Failed to Insert '.mysqli_error($con).'</h4>           
+             ERROR! Failed to Save '.mysqli_error($con).'         
             ';
         }
     }

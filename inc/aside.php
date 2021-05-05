@@ -42,17 +42,18 @@
           </a>
         </li> -->
         <li>
-          <a href="activity.php">
-            <i class="nc-icon nc-paper"></i>
-            <p>Log Activity</p>
-          </a>
-        </li>
-        <li>
           <a href="basic-group.php">
             <i class="nc-icon nc-layout-11"></i>
             <p>Basic Group</p>
           </a>
         </li>
+        <li>
+          <a href="activity.php">
+            <i class="nc-icon nc-paper"></i>
+            <p>Log Activity</p>
+          </a>
+        </li>
+        
         <li>
           <a href="preview-activity.php">
             <i class="nc-icon nc-credit-card"></i>
